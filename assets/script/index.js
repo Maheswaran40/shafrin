@@ -1,3 +1,51 @@
+function signup(e) {
+    e.preventDefault()
+    let username = document.getElementById("username").value
+    let userEmail = document.getElementById("email").value
+    let userPass = document.getElementById("password").value
+
+    alert("signup")
+    console.log(userEmail, userPass, username);
+
+
+    // storing data in local storage
+    localStorage.setItem("username", username)
+    localStorage.setItem("useremail", userEmail)
+    localStorage.setItem("userPass", userPass)
+
+
+    // moving to login page
+    window.location.href = "../../index.html"
+}
+
+
+
+// login function 
+function loginFun(e) {
+    e.preventDefault()
+
+    let userEmail = document.getElementById("useremail").value
+    let userPass = document.getElementById("userpass").value
+
+    let localEmail = localStorage.getItem("useremail")
+    let localPass = localStorage.getItem("userPass")
+
+    if (userEmail == localEmail && userPass == localPass) {
+        alert("login successfully")
+        window.location.href = "./assets/pages/home.html"
+    }
+
+    else {
+        alert("login failed")
+    }
+
+}
+
+
+
+document.getElementById("welcome").innerHTML = `welcome to home page ${localStorage.getItem("username")}`
+
+
 const products = [
     {
         "id": 1,
@@ -80,3 +128,28 @@ const products = [
         "description": "Compact power bank for convenient charging on the go."
     }
 ];
+
+
+
+function showData (){
+    let data=""
+    products.map((value)=>(
+            data += `
+            <div class="col-lg-4 col-md-6 col-12">
+            <div class="card">
+                <img src="${value.image}" alt="">
+                <div class="card-body">
+                    <h3>name :${value.name}</h3>
+                    <h3>price :${value.price}</h3>
+                </div>
+            </div>
+        </div>
+            `
+    ))
+
+    document.getElementById("homeData").innerHTML = data
+}
+showData()
+
+
+
