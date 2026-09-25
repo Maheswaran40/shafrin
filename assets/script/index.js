@@ -51,39 +51,39 @@ const products = [
         "id": 1,
         "name": "Samsung Galaxy A15",
         "category": "Mobile",
-        "price": 15999,
-        "image": "https://placehold.co/600x450?text=Samsung+Galaxy+A15",
+        "price": "15999",
+        "image": "../images/samsung.png",
         "description": "Affordable smartphone with a bright display and reliable performance."
     },
     {
         "id": 2,
         "name": "Acer Aspire 5",
         "category": "Laptop",
-        "price": 52999,
-        "image": "https://placehold.co/600x450?text=Acer+Aspire+5",
+        "price": "52999",
+        "image": "../images/acer.png",
         "description": "Everyday laptop suitable for study, work and browsing."
     },
     {
         "id": 3,
         "name": "Sony WH-CH520",
         "category": "Headphones",
-        "price": 4499,
-        "image": "https://placehold.co/600x450?text=Sony+Headphones",
+        "price": "4499",
+        "image": "../images/sony.png",
         "description": "Comfortable wireless headphones for music and calls."
     },
     {
         "id": 4,
         "name": "Noise ColorFit Watch",
         "category": "Smart Watch",
-        "price": 2999,
-        "image": "https://placehold.co/600x450?text=Smart+Watch",
+        "price": "2999",
+        "image": "../images/watch.png",
         "description": "Smart watch with fitness tracking and everyday notifications."
     },
     {
         "id": 5,
         "name": "Logitech K380 Keyboard",
         "category": "Keyboard",
-        "price": 3295,
+        "price": "3295",
         "image": "https://placehold.co/600x450?text=Keyboard",
         "description": "Compact wireless keyboard for desktops, tablets and laptops."
     },
@@ -91,7 +91,7 @@ const products = [
         "id": 6,
         "name": "Logitech M331 Mouse",
         "category": "Mouse",
-        "price": 1599,
+        "price": "1599",
         "image": "https://placehold.co/600x450?text=Wireless+Mouse",
         "description": "Quiet wireless mouse with comfortable everyday control."
     },
@@ -99,7 +99,7 @@ const products = [
         "id": 7,
         "name": "JBL Go 3 Speaker",
         "category": "Speaker",
-        "price": 3499,
+        "price": "3499",
         "image": "https://placehold.co/600x450?text=JBL+Speaker",
         "description": "Portable Bluetooth speaker with compact design and clear sound."
     },
@@ -107,7 +107,7 @@ const products = [
         "id": 8,
         "name": "Lenovo Tab M10",
         "category": "Tablet",
-        "price": 18999,
+        "price": "18999",
         "image": "https://placehold.co/600x450?text=Lenovo+Tablet",
         "description": "Large-screen tablet for learning, entertainment and browsing."
     },
@@ -115,15 +115,15 @@ const products = [
         "id": 9,
         "name": "Canon EOS 1500D",
         "category": "Camera",
-        "price": 42999,
+        "price": "42999",
         "image": "https://placehold.co/600x450?text=Canon+Camera",
         "description": "Beginner-friendly DSLR camera for photography and video."
     },
     {
         "id": 10,
-        "name": "Anker PowerCore 10000",
+        "name": " Anker PowerCore 10000",
         "category": "Power Bank",
-        "price": 2499,
+        "price": "2499",
         "image": "https://placehold.co/600x450?text=Power+Bank",
         "description": "Compact power bank for convenient charging on the go."
     }
@@ -135,12 +135,13 @@ function showData (){
     let data=""
     products.map((value)=>(
             data += `
-            <div class="col-lg-4 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12">
             <div class="card">
-                <img src="${value.image}" alt="">
+                <img src="${value.image}" height="200px" width="100%" alt="">
                 <div class="card-body">
                     <h3>name :${value.name}</h3>
                     <h3>price :${value.price}</h3>
+                    <button class="btn btn-info">cart</button>
                 </div>
             </div>
         </div>
@@ -153,3 +154,33 @@ showData()
 
 
 
+// search 
+
+function searchFun(e){
+    e.preventDefault()
+
+    let searchData = document.getElementById("searchInput").value
+
+    let searchOutput=products.filter((v)=> v.name.toLowerCase().trim().includes(searchData.toLowerCase().trim()) || v.price.includes(searchData.trim()))
+
+    console.log("searchOutput",searchOutput);
+
+
+     let data=""
+    searchOutput.map((value)=>(
+            data += `
+            <div class="col-lg-3 col-md-6 col-12">
+            <div class="card">
+                <img src="${value.image}" height="200px" width="100%" alt="">
+                <div class="card-body">
+                    <h3>name :${value.name}</h3>
+                    <h3>price :${value.price}</h3>
+                </div>
+            </div>
+        </div>
+            `
+    ))
+
+    document.getElementById("searchData").innerHTML = data
+    
+}
