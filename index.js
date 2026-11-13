@@ -7,6 +7,11 @@ dotenv.config()
 const connectDB = require("./config/db")
 connectDB()
 
+app.use(express.json())
+
+const route = require("./routes/userRoutes")
+app.use("/api",route)
+
 // REST API  [http]  get , post , put , delete
 
 app.get("/" ,(req,res)=>(
