@@ -7,6 +7,12 @@ dotenv.config()
 const connectDB = require("./config/db")
 connectDB()
 
+const cors = require("cors")
+app.use(cors({
+    origin: "http://localhost:5174",
+    credentials: true
+}))
+
 app.use(express.json())
 
 const route = require("./routes/userRoutes")

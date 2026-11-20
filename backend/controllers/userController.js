@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken")
 
 const getCookieOptions = () => ({
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
+    secure: false,
+    sameSite:"lax",
     path: "/",
     maxAge: 24 * 60 * 60 * 1000,
 });
@@ -76,7 +76,7 @@ async function loginFun(req, res) {
             { expiresIn: "1d" }
         );
 
-        res.cookie("token", token, getCookieOptions);
+        res.cookie("token", token, getCookieOptions());
 
         return res.status(200).json({
             success: true,
